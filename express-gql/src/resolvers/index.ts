@@ -1,0 +1,8 @@
+//////////////////////////////////////////////////////////////////////////////
+// DO NOT MODIFY. This is a generated file.
+//////////////////////////////////////////////////////////////////////////////
+import { UserResolver } from './user';
+import { DataResolver } from './data';
+import { ItemResolver } from './item';
+
+export default [UserResolver, DataResolver, ItemResolver];

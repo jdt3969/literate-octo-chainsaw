@@ -1,0 +1,76 @@
+{
+  "name": "express-gql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && yarn start:prod || yarn start:dev",
+    "start:dev": "yarn watch",
+    "start:prod": "yarn build && yarn serve",
+    "build": "yarn build-ts",
+    "serve": "node dist/index.js",
+    "watch-node": "nodemon dist/index.js",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "watch": "concurrently -p \"[{name}]\" -n \"TypeScript,Node\" -c \"bgBlue.bold,bgGreen.bold\" \"yarn run watch-ts\" \"yarn run watch-node\"",
+    "format": "prettier --config package.json --write",
+    "no-var": "[[ -z $(git ls-files | grep '\\.jsx\\?$' | xargs grep -i 'var\\s') ]] || (echo 'Error: var keyword not allowed' && exit 1)",
+    "g": "pink generate"
+  },
+  "_moduleAliases": {
+    "@": "./dist"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.9.12",
+    "class-validators": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "husky": "^3.1.0",
+    "lodash": "^4.17.15",
+    "module-alias": "^2.2.2",
+    "pg-promise": "^10.3.1",
+    "pinkprint": "^1.2.0",
+    "pluralize": "^8.0.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^0.17.5",
+    "typeorm": "^0.2.20"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.2",
+    "@types/graphql": "^14.5.0",
+    "@types/jsonwebtoken": "^8.3.5",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.12",
+    "@types/node-fetch": "^2.5.4",
+    "@types/pluralize": "^0.0.29",
+    "concurrently": "^5.0.0",
+    "if-env": "^1.0.4",
+    "lint-staged": "^9.4.3",
+    "nodemon": "^2.0.1",
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn format",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn no-var && lint-staged",
+      "...": "..."
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "arrowParens": "always"
+  }
+}
